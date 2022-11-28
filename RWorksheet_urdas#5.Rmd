@@ -1,0 +1,161 @@
+---
+title: "RWorksheet_urdas#5"
+author: "Cindy Urdas"
+date: "2022-11-24"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**1. The table shows the enrollment of BS in Computer Science, SY 2010-2011.
+Course Year	2019 - 2020**\
+1st	80\
+2nd	75\
+3rd	70\
+4th	60\
+
+
+**a.	Plot the data using a bar graph. Write the codes and copy the result.**\
+```{r enrollment, echo=FALSE}
+Enrollment <-c(80,75,70,60)
+barplot(Enrollment,
+        main="BS in Computer Science",
+        xlab="Course Year",
+        ylab="SY2019-2020",
+        names.arg = c("1st", "2nd", "3rd", "4th"),
+        col="cyan",)
+```
+
+b.	Using the same table, label the barchart with Title = ” Enrollment of BS Computer Science horizontal axis = “Curriculum Year” and vertical axis = “number of students”\
+```{r, echo=FALSE}
+Enrollment <-c(80,75,70,60)
+barplot(Enrollment,
+        main="Enrollment of BS Computer Science",
+        xlab="Curriculum Year",
+        ylab="number of students",
+        names.arg = c("1st", "2nd", "3rd", "4th"),)
+```
+**2.	The monthly income of De Jesus family was spent on the following:**\
+
+60% on Food, 10% on electricity, 5% for savings, and 25% for other miscellaneous expenses.\
+a.	Create a table for the above scenario. Write the codes and its result.\
+```{r percent, echo=FALSE}
+percent_spent <- c(60,10,5,25)
+barplot(percent_spent,names.arg = c("Food", "Electricity", "Savings", "Miscellaneous"))
+
+```
+
+b.	Plot the data using a pie chart. Add labels, colors and legend. Write the codes and its result.\
+```{r percent1, echo=FALSE}
+percent_spent <- c(60,10,5,25)
+pie(percent_spent)
+percent <- pie(percent_spent,
+             col = rainbow(length(percent_spent)),
+             labels = c(60,10,5,25))
+
+percent1 <- round(percent_spent/sum(percent_spent) * 100, 1)
+
+percent1 <- paste(percent1,"%",sep = "")
+pie(percent_spent, main = "The monthly income of De Jesus family was spent on the following:
+
+",col=rainbow(length(percent_spent)),labels = percent1,cex=0.8)
+
+legend(1, c("Food", "Electricity", "Savings", "Miscellaneous"),
+       cex = 0.8,fill = rainbow((length(percent_spent))))
+
+
+```
+**3.	Open the mtcars dataset.**\
+
+a.	Create a simple histogram specifically for mpg (miles per gallon) variable. Use $ to select the mpg only. Write the codes and its result.\
+```{r, echo=FALSE}
+a<-mtcars$mpg
+a
+
+a2 <-hist(a, xlab="Miles Per Gallon",
+          main="Simple Histogram")
+
+```
+
+b.	Colored histogram with different number of bins. hist(mtcars$mpg, breaks=12, col="red") Note: breaks= controls the number of bins\
+```{r, echo=FALSE}
+b3 <-hist(a, breaks=12, col="red", xlab="Miles Per Gallon",
+              main="Histogram of MPG")
+```
+c.	Add a Normal Curve
+x <- mtcars$mpg
+h<-hist(x, breaks=10, col="red", xlab="Miles Per Gallon", main="Histogram with Normal Curve")
+xfit<-seq(min(x),max(x),length=40) yfit<-dnorm(xfit,mean=mean(x),sd=sd(x))
+yfit <- yfit*diff(h$mids[1:2])*length(x) lines(xfit, yfit, col="blue", lwd=2)
+Copy the result.
+
+```{r, echo=FALSE}
+a<-mtcars$mpg
+c3 <-hist(a, breaks=12, col="red", xlab="Miles Per Gallon",
+           main="Histogram with Normal Curve")
+xfit<-seq(min(a),max(a),length=40)
+yfit<-dnorm(xfit,mean=mean(a),sd=sd(a))
+yfit <- yfit*diff(c3$mids[1:2])*length(a)
+lines(xfit, yfit, col="blue", lwd=2)
+
+```
+**4.	Open the iris dataset. Create a subset for each species.**\
+
+a.	Write the codes and its result.
+```{r, echo=FALSE}
+library(datasets)
+str(iris)
+
+sub1 <- subset(iris, Species == "setosa")
+sub2 <- subset(iris, Species == "versicolor")
+sub3 <- subset(iris, Species == "virginica")
+
+```
+
+b.	Get the mean for every characteristics of each species using colMeans().\ Write the codes and its result.\
+Example: setosa <- colMeans(setosa[sapply(setosaDF,is.numeric)])\
+```{r, echo=FALSE}
+sub1 <- subset(iris, Species == "setosa")
+setosa <- colMeans(sub1[sapply(sub1,is.numeric)])
+setosa
+
+sub2 <- subset(iris, Species == "versicolor")
+versicolor <- colMeans(sub2[sapply(sub2,is.numeric)])
+versicolor
+
+sub3<- subset(iris, Species == "virginica")
+virginica<- colMeans(sub3[sapply(sub3,is.numeric)])
+virginica
+
+```
+c.	Combine all species by using rbind()\
+The table should be look like this:\
+```{r, echo=FALSE}
+table <- rbind(setosa, versicolor, virginica)
+table
+```
+d.	From the data in 4-c: Create the barplot(). Write the codes and its result.\
+```{r, echo=FALSE}
+barplot(table, beside = TRUE,
+        main = "Iris Data",
+        xlab = "Characteristics",
+        ylab = "Mean Scores",
+        col = c("red","green","blue"))
+
+```
+
+ 
+
+
+
+ 
+
+
+
+
+ 
+
+
+
